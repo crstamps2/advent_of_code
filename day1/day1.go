@@ -4,10 +4,10 @@ import (
 	"slices"
 )
 
-func FindCombinedDistance(list1 []int, list2 []int) int{
+func FindCombinedDistance(list1 []float64, list2 []float64) float64{
 	slices.Sort(list1)
 	slices.Sort(list2)
-	var combinedDistance int
+	var combinedDistance float64
 	for i, v := range list1 {
 		combinedDistance += v - list2[i]
 	}
