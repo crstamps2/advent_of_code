@@ -7,7 +7,7 @@ func TestFindCombinedDistance(t *testing.T) {
 		name string
 		list1 []float64
 		list2 []float64
-		want float64
+		want int
 	}{
 		{"should be 4", []float64{5,1,7,6}, []float64{9,7,5,2}, 4},
 		{"should also be 4", []float64{9,7,5,2}, []float64{5,1,7,6}, 4},
