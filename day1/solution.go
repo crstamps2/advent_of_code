@@ -28,7 +28,8 @@ func main() {
 		rightList = append(rightList, right)
 	}
 	
-	fmt.Printf("Your answer is: %v\n", FindCombinedDistance(leftList, rightList))
+	fmt.Printf("Combined Distance: %v\n", FindCombinedDistance(leftList, rightList))
+	fmt.Printf("Similarity Score: %v\n", CalculateSimilarityScore(leftList, rightList))
 }
 
 func FindCombinedDistance(list1 []float64, list2 []float64) int{
@@ -40,3 +41,20 @@ func FindCombinedDistance(list1 []float64, list2 []float64) int{
 	}
 	return combinedDistance
 }
+
+func CalculateSimilarityScore(leftList []float64, rightList[]float64) int {
+	var similarityScores []float64
+	for i := 0; i < len(leftList); i++ {
+		occurences := 0.0
+		for x := 0; x < len(rightList); x++ {
+			if leftList[i] == rightList[x] { occurences++ }
+		}
+		similarityScores = append(similarityScores, leftList[i]*occurences)
+	}
+	sum := 0.0
+	for _, score := range similarityScores {
+		sum += score
+	}
+	return int(sum)
+}
+
