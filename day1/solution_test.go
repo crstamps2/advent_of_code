@@ -11,6 +11,8 @@ func TestFindCombinedDistance(t *testing.T) {
 	}{
 		{"should be 4", []float64{5,1,7,6}, []float64{9,7,5,2}, 4},
 		{"should also be 4", []float64{9,7,5,2}, []float64{5,1,7,6}, 4},
+		{"should be 20", []float64{9,8,7,6}, []float64{11,12,13,14}, 20},
+		{"should also be 20", []float64{11,12,13,14}, []float64{9,8,7,6}, 20},
 		{"should be 28", []float64{-5,1,7,6}, []float64{9,8,5,15}, 28},
 	}
 

@@ -2,49 +2,33 @@ package main
 
 import (
 	"fmt"
-	"encoding/csv"
 	"os"
+	"strings"
 	"strconv"
-	"slices"
+	"bufio"
 	"math"
+	"slices"
 )
 
 func main() {
-	f1, err := os.Open("list1.csv")
+	file, err := os.Open("inputs.txt")
 	if err != nil {
 			panic(err)
 	}
-	defer f1.Close()
+	defer file.Close()
 
-	csvReader := csv.NewReader(f1)
-	records, err := csvReader.ReadAll()
-	var list1 []float64
-	for index, record := range records {
-		i, _ := strconv.ParseFloat(record[index], 64)
-		list1 = append(list1, i)
-	}
-	if err != nil {
-			panic(err)
-	}
+	scanner := bufio.NewScanner(file)
 
-	f2, err := os.Open("list2.csv")
-	if err != nil {
-			panic(err)
-	}
-	defer f2.Close()
-
-	csvReader = csv.NewReader(f2)
-	records, err = csvReader.ReadAll()
-	var list2 []float64
-	for index, record := range records {
-		i, _ := strconv.ParseFloat(record[index], 64)
-		list2 = append(list2, i)
-	}
-	if err != nil {
-			panic(err)
+	var leftList, rightList []float64
+	for scanner.Scan() {
+		line := strings.Fields(scanner.Text())
+		left, _ := strconv.ParseFloat(line[0], 64)
+		leftList = append(leftList, left)
+		right, _ := strconv.ParseFloat(line[1], 64)
+		rightList = append(rightList, right)
 	}
 	
-	fmt.Printf("Your answer is: %v\n", FindCombinedDistance(list1, list2))
+	fmt.Printf("Your answer is: %v\n", FindCombinedDistance(leftList, rightList))
 }
 
 func FindCombinedDistance(list1 []float64, list2 []float64) int{
