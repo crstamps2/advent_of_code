@@ -36,17 +36,21 @@ func main() {
 	fmt.Printf("Number of Safe Readings: %v\n", totalSafe)
 }
 
+//I am not too particularly happy with this agorithm, it works but I 
+//am sure there is a better way to do this.
 func IsReportSafe(readings []int) bool {
-	var readingWentUp bool
+	previousReadingWentUp := readings[1] > readings [0]
 	for index, reading := range readings {
 		if index == 0 { continue } //skip first number
 		if reading == (readings[index-1]) { return false }
 		if math.Abs(float64(reading - readings[index-1])) > 3 { return false }
-
-		if reading > readings[index-1] { readingWentUp = true }
-		if reading > readings[index-1] && readingWentUp {
+		
+		if index == 1 { continue }
+		if reading > readings[index-1] && previousReadingWentUp {
+			previousReadingWentUp = true
 			continue
-		} else if reading < readings[index-1] && !readingWentUp {
+		} else if reading < readings[index-1] && !previousReadingWentUp {
+			previousReadingWentUp = false
 			continue
 		} else {
 			return false

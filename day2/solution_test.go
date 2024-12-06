@@ -18,6 +18,7 @@ func TestIsReportSafe(t *testing.T) {
 		{"should be false", []int{1,2,3,3,4}, false},
 		{"should be false", []int{4,3,3,2,1}, false},
 		{"should be false", []int{1,2,3,2,1}, false},
+		{"should be false", []int{62,61,58,59,60}, false},
 	}
 
 	for _, tt := range tests {
