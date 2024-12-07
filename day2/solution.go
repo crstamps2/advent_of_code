@@ -31,7 +31,7 @@ func main() {
 	}
 	totalSafe := 0
 	for _, report := range reports {
-		if IsReportSafe(report) { totalSafe++ }
+		if IsSafeWithReadingRemoved(report) { totalSafe++ }
 	}
 	fmt.Printf("Number of Safe Readings: %v\n", totalSafe)
 }
@@ -57,4 +57,19 @@ func IsReportSafe(readings []int) bool {
 		}
 	}
 	return true
+}
+
+
+func IsSafeWithReadingRemoved(readings []int) bool {
+	for i := 0; i < len(readings); i++ {
+			modifiedReading := remove(readings, i)
+			if IsReportSafe(modifiedReading) {
+					return true
+			}
+	}
+	return false
+}
+
+func remove[T comparable](slice []T, s int) []T {
+	return append(slice[:s], slice[s+1:]...)
 }
