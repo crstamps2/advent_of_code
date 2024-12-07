@@ -34,7 +34,7 @@ func TestIsReportSafe(t *testing.T) {
 func TestIsSafeWithReadingRemoved(t *testing.T) {
 	tests := []struct {
 		name string
-		readings []int
+		inputs []int
 		want bool
 	}{
 		{"should be true", []int{7,6,4,2,1}, true},
@@ -49,9 +49,9 @@ func TestIsSafeWithReadingRemoved(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := IsSafeWithReadingRemoved(tt.readings)
+			result := IsSafeWithReadingRemoved(tt.inputs)
 			if result != tt.want {
-				t.Errorf("inputs: %v , got: %v, wanted: %v", tt.readings, result, tt.want)
+				t.Errorf("inputs: %v , got: %v, wanted: %v", tt.inputs, result, tt.want)
 			} 
 		})
 	}

@@ -61,15 +61,18 @@ func IsReportSafe(readings []int) bool {
 
 
 func IsSafeWithReadingRemoved(readings []int) bool {
-	for i := 0; i < len(readings); i++ {
-			modifiedReading := remove(readings, i)
-			if IsReportSafe(modifiedReading) {
-					return true
-			}
+	for i := range readings {
+		modifiedReading := remove(readings, i)
+		if IsReportSafe(modifiedReading) {
+				return true
+		}
 	}
 	return false
 }
 
 func remove[T comparable](slice []T, s int) []T {
-	return append(slice[:s], slice[s+1:]...)
+	deleted := make([]T, len(slice)-1)
+	copy(deleted[:s], slice[:s])
+	copy(deleted[s:], slice[s+1:])
+	return deleted
 }
